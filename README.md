@@ -15,4 +15,4 @@ As of this writing, the component versions used for this image are:
 | PyInstaller | 3.3      |
 | jq          | 1.5      |
 
-The resulting image is about 25MB in size.
+The resulting image is about 22MB in size.
