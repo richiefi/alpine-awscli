@@ -36,4 +36,10 @@ RUN chmod a+x /pyinstaller/*
 RUN /pyinstaller/pyinstaller.sh --noconfirm --onefile --hiddenimport=awscli.handlers --add-data=/usr/local/lib/python3.6/site-packages/awscli/data:data --add-data=/usr/local/lib/python3.6/site-packages/botocore/data:data --runtime-hook=change-botocore-root.py /usr/local/bin/aws
 
 FROM alpine:3.6
+RUN apk --update --no-cache add curl \
+  && curl -o /usr/bin/jq -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 \
+  && chmod +x /usr/bin/jq
+  
+FROM alpine:3.6
 COPY --from=0 /src/dist/aws /usr/bin
+COPY --from=1 /usr/bin/jq /usr/bin
